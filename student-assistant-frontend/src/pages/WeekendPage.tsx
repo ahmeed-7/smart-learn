@@ -13,7 +13,8 @@ const WeekendPage: React.FC = () => {
             try {
                 const data = await weekendService.getTasks();
                 setTasks(data);
-            } catch (_error) {
+            } catch (error) {
+                console.error("Weekend Load Error:", error);
                 toast.error('Failed to load weekend tasks');
             } finally {
                 setIsLoading(false);
@@ -36,7 +37,8 @@ const WeekendPage: React.FC = () => {
                     style: { borderRadius: '10px', background: '#333', color: '#fff' }
                 });
             }
-        } catch (_error) {
+        } catch (error) {
+            console.error("Weekend Update Error:", error);
             toast.error('Failed to update task');
         }
     };
@@ -90,33 +92,43 @@ const WeekendPage: React.FC = () => {
                         Career Challenges
                     </h2>
                     <div className="grid grid-cols-1 gap-4">
-                        {tasks.map((task) => (
-                            <div
-                                key={task.id}
-                                onClick={() => handleToggle(task)}
-                                className={`group p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-4 ${task.isCompleted
-                                    ? 'bg-slate-50 border-emerald-100 opacity-70'
-                                    : 'bg-white border-slate-100 hover:border-primary-200 hover:shadow-lg'
-                                    }`}
-                            >
-                                <div className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${task.isCompleted ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400 group-hover:bg-primary-100 group-hover:text-primary-600'
-                                    }`}>
-                                    {task.isCompleted ? <CheckCircle2 size={24} /> : <Circle size={24} />}
+                        {tasks.length === 0 ? (
+                            <div className="p-12 text-center bg-white rounded-3xl border-2 border-dashed border-slate-200">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
+                                    <Star size={32} />
                                 </div>
-                                <div className="flex-1">
-                                    <h3 className={`font-bold ${task.isCompleted ? 'text-slate-500 line-through' : 'text-slate-800'}`}>
-                                        {task.title}
-                                    </h3>
-                                    <p className="text-sm text-slate-500">{task.description}</p>
-                                </div>
-                                <div className="text-right shrink-0">
-                                    <span className={`text-sm font-bold block ${task.isCompleted ? 'text-emerald-500' : 'text-slate-400'}`}>
-                                        +{task.xpPoints} XP
-                                    </span>
-                                    <ChevronRight size={16} className={`ml-auto mt-1 ${task.isCompleted ? 'text-emerald-400' : 'text-slate-300'}`} />
-                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">No Challenges Yet</h3>
+                                <p className="text-slate-500">Wait for the weekend or check back later for your growth goals.</p>
                             </div>
-                        ))}
+                        ) : (
+                            tasks.map((task) => (
+                                <div
+                                    key={task.id}
+                                    onClick={() => handleToggle(task)}
+                                    className={`group p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-4 ${task.isCompleted
+                                        ? 'bg-slate-50 border-emerald-100 opacity-70'
+                                        : 'bg-white border-slate-100 hover:border-primary-200 hover:shadow-lg'
+                                        }`}
+                                >
+                                    <div className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${task.isCompleted ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400 group-hover:bg-primary-100 group-hover:text-primary-600'
+                                        }`}>
+                                        {task.isCompleted ? <CheckCircle2 size={24} /> : <Circle size={24} />}
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className={`font-bold ${task.isCompleted ? 'text-slate-500 line-through' : 'text-slate-800'}`}>
+                                            {task.title}
+                                        </h3>
+                                        <p className="text-sm text-slate-500">{task.description}</p>
+                                    </div>
+                                    <div className="text-right shrink-0">
+                                        <span className={`text-sm font-bold block ${task.isCompleted ? 'text-emerald-500' : 'text-slate-400'}`}>
+                                            +{task.xpPoints} XP
+                                        </span>
+                                        <ChevronRight size={16} className={`ml-auto mt-1 ${task.isCompleted ? 'text-emerald-400' : 'text-slate-300'}`} />
+                                    </div>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
 

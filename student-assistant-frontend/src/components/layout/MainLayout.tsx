@@ -1,10 +1,21 @@
 import React from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
-import { LayoutDashboard, Calendar, TreePine, Coffee, Settings, LogOut, Menu } from 'lucide-react';
+
 import { authService } from '../../api/authService';
 import ChatSupport from './ChatSupport';
-
+import {
+  LayoutDashboard,
+  Calendar,
+  TreePine,
+  Coffee,
+  Settings,
+  LogOut,
+  Menu,
+  ClipboardList,
+  CheckSquare,
+  GraduationCap
+} from 'lucide-react';
 const MainLayout: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
     const { logout, user, updateUser } = useAuthStore();
@@ -32,7 +43,10 @@ const MainLayout: React.FC = () => {
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
-        { icon: Calendar, label: 'Schedule', path: '/schedule' },
+        { icon: Calendar, label: 'Class Schedule', path: '/schedule' },
+        { icon: ClipboardList, label: 'Study Planner', path: '/planner' },
+        { icon: CheckSquare, label: 'Tasks', path: '/tasks' },
+        { icon: GraduationCap, label: 'Exams', path: '/exams' },
         { icon: TreePine, label: 'Knowledge Tree', path: '/tree' },
         { icon: Coffee, label: 'Weekend Mode', path: '/weekend' },
         { icon: Settings, label: 'Settings', path: '/settings' },
@@ -60,9 +74,12 @@ const MainLayout: React.FC = () => {
       `}>
                 <div className="h-full flex flex-col">
                     <div className="p-6 border-b border-slate-100">
-                        <Link to="/dashboard" className="flex items-center gap-2 font-bold text-xl text-primary-600">
-                            <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center text-white">SA</div>
-                            <span>StudentAssist</span>
+                        <Link to="/dashboard" className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-2xl bg-primary-600 flex items-center justify-center text-white font-bold">SL</div>
+                            <div>
+                                <h1 className="text-xl font-bold text-slate-900">Smart Learn</h1>
+                                <p className="text-xs text-slate-500">Academic Success Platform</p>
+                            </div>
                         </Link>
                     </div>
 
@@ -114,7 +131,7 @@ const MainLayout: React.FC = () => {
                     <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg">
                         <Menu size={24} />
                     </button>
-                    <span className="font-bold text-primary-600">StudentAssist</span>
+                    <span className="font-bold text-primary-600">Smart Learn</span>
                     <div className="w-10" />
                 </header>
 

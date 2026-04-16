@@ -1,4 +1,5 @@
 {
+  "name": "smart-learn-backend",
   "scripts": {
     "dev": "nodemon server.js"
   },

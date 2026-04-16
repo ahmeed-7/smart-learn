@@ -1,22 +1,14 @@
 import apiClient from './apiClient';
-
-export interface WeekendTask {
-    id: string;
-    title: string;
-    description: string;
-    xpPoints: number;
-    isCompleted: boolean;
-    category: string;
-}
+import type { WeekendTask } from '../store/useWeekendStore';
 
 export const weekendService = {
     getTasks: async () => {
-        const response = await apiClient.get<WeekendTask[]>('/weekend/tasks');
+        const response = await apiClient.get<WeekendTask[]>('/weekend/challenges');
         return response.data;
     },
 
-    toggleTask: async (taskId: string) => {
-        const response = await apiClient.post('/weekend/tasks/toggle', { taskId });
+    toggleTask: async (id: string) => {
+        const response = await apiClient.put(`/weekend/challenges/${id}/toggle`);
         return response.data;
     }
 };

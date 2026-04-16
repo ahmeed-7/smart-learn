@@ -5,6 +5,12 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
+const taskRoutes = require('./routes/taskRoutes');
+const examRoutes = require('./routes/examRoutes');
+const plannerRoutes = require('./routes/plannerRoutes');
+const weekendRoutes = require('./routes/weekendRoutes');
 
 const app = express();
 
@@ -20,6 +26,12 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/schedule', scheduleRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/exams', examRoutes);
+app.use('/api/planner', plannerRoutes);
+app.use('/api/weekend', weekendRoutes);
 
 // Health check
 app.get('/', (req, res) => {

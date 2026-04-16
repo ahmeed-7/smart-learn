@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
-import { LogIn, Mail, Lock, Loader2 } from 'lucide-react';
+import { LogIn, Mail, Lock, Loader2, ChevronLeft } from 'lucide-react';
 import { authService } from '../api/authService';
 import toast from 'react-hot-toast';
 
@@ -43,14 +43,22 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+        <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center justify-center relative">
+            <button
+                onClick={() => navigate('/')}
+                className="absolute top-8 left-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100 font-semibold text-sm"
+            >
+                <ChevronLeft size={18} />
+                Back to Home
+            </button>
+
             <div className="w-full max-w-md">
                 <div className="text-center mb-10">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-600 text-white shadow-xl shadow-primary-200 mb-6">
                         <LogIn size={32} />
                     </div>
                     <h1 className="text-3xl font-bold text-slate-900">Sign In</h1>
-                    <p className="text-slate-500 mt-2">Welcome back to Student Assistant</p>
+                    <p className="text-slate-500 mt-2">Welcome back to Smart Learn</p>
                 </div>
 
                 <div className="glass-card p-8">

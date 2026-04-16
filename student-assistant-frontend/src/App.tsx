@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import ProtectedRoute from './components/layout/ProtectedRoute';
-
+import PlannerPage from './pages/PlannerPage'; 
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import OnboardingPage from './pages/OnboardingPage';
@@ -13,6 +13,8 @@ import WeekendPage from './pages/WeekendPage';
 import DashboardPage from './pages/DashboardPage';
 import SettingsPage from './pages/SettingsPage';
 import FlashcardPage from './pages/FlashcardPage';
+import TasksPage from './pages/TasksPage';
+import ExamsPage from './pages/ExamsPage';
 
 // ─── Real Organic Knowledge Tree ─────────────────────────────────────────────
 const leaves = [
@@ -318,8 +320,8 @@ const Landing: React.FC = () => {
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 font-extrabold text-xl text-primary-600">
-            <div className="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-sm font-black">SA</div>
-            StudentAssist
+            <div className="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-sm font-black">SL</div>
+            Smart Learn
           </div>
           <div className="flex items-center gap-3">
             <Link to="/login" className="btn btn-secondary px-5 h-9 text-sm">Sign In</Link>
@@ -353,21 +355,6 @@ const Landing: React.FC = () => {
               I have an account
             </Link>
           </div>
-          {/* Social proof */}
-          <div className="flex items-center gap-4 pt-2">
-            <div className="flex -space-x-2">
-              {['#0284c7', '#7c3aed', '#10b981', '#ec4899'].map((c, i) => (
-                <div key={i}
-                  className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold"
-                  style={{ background: c }}>
-                  {['A', 'B', 'C', 'D'][i]}
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-slate-500">
-              <span className="font-bold text-slate-800">200+ students</span> already using StudentAssist
-            </p>
-          </div>
         </div>
 
         {/* Right — Real Organic Knowledge Tree */}
@@ -396,7 +383,7 @@ const Landing: React.FC = () => {
         <div className="text-center mb-14">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-4">Everything you need to excel</h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            From smart scheduling to AI-powered lesson logs — StudentAssist is your all-in-one academic co-pilot.
+            From smart scheduling to AI-powered lesson logs — Smart Learn is your all-in-one academic co-pilot.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -435,7 +422,7 @@ const Landing: React.FC = () => {
 
       {/* FOOTER */}
       <footer className="border-t border-slate-100 py-8 text-center text-sm text-slate-400">
-        © 2026 StudentAssist · Built with ❤️ for curious minds
+        © 2026 Smart Learn · Built with ❤️ for curious minds
       </footer>
     </div>
   );
@@ -453,6 +440,9 @@ const App: React.FC = () => (
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/planner" element={<PlannerPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/exams" element={<ExamsPage />} />
           <Route path="/tree" element={<KnowledgeTreePage />} />
           <Route path="/add-log/:subjectId" element={<AddLogPage />} />
           <Route path="/weekend" element={<WeekendPage />} />
